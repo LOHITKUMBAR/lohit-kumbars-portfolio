@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lohit Kumbar | Mechanical Engineer Portfolio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts Inter -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- AOS Animation -->
+  <link
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    rel="stylesheet"
+  />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Font Awesome CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    /* Font and base */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d1117;
+      color: #c9a23f;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Background gear SVG as rotating blurred mesh */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -150px;
+      left: -150px;
+      width: 700px;
+      height: 700px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 200 200"><g fill="rgba(201,162,63,0.06)"><circle cx="100" cy="100" r="80" stroke="none"/><g><rect x="98" y="10" width="4" height="20"/><rect x="98" y="170" width="4" height="20"/><rect x="170" y="98" width="20" height="4"/><rect x="10" y="98" width="20" height="4"/><rect x="155" y="45" width="20" height="4" transform="rotate(45 165 47)"/><rect x="25" y="45" width="20" height="4" transform="rotate(-45 35 47)"/><rect x="155" y="145" width="20" height="4" transform="rotate(-45 165 147)"/><rect x="25" y="145" width="20" height="4" transform="rotate(45 35 147)"/></g></g></svg>') no-repeat center;
+      background-size: contain;
+      filter: blur(6px);
+      opacity: 0.12;
+      z-index: 0;
+      animation: rotateGear 120s linear infinite;
+      transform-origin: 50% 50%;
+    }
+
+    @keyframes rotateGear {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Slow rotation by default */
+    body.rotating-fast::before {
+      animation-duration: 40s !important;
+    }
+
+    /* Section styling */
+    section {
+      position: relative;
+      z-index: 1;
+      margin: 2rem auto;
+      max-width: 900px;
+      background-color: #161b22;
+      border-radius: 1rem;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 8px 24px rgba(201, 162, 63, 0.15);
+    }
+
+    /* Header styling */
+    header {
+      background-color: #161b22cc; /* translucent charcoal */
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(201, 162, 63, 0.4);
+      backdrop-filter: saturate(180%) blur(10px);
+    }
+
+    /* Nav inside header */
+    nav {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      color: #c9a23f;
+      font-size: 1.125rem;
+    }
+
+    nav a {
+      color: #c9a23f;
+      padding: 0.25rem 1rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #c9a23f;
+      color: #0d1117;
+      outline: none;
+    }
+
+    /* Mobile menu button */
+    #menuBtn {
+      display: none;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: #c9a23f;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    #menuBtn:hover,
+    #menuBtn:focus {
+      color: #f5d07e;
+      outline: none;
+    }
+
+    /* Nav links container */
+    #menu {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #menu {
+        display: none;
+        flex-direction: column;
+        background-color: #161b22;
+        position: absolute;
+        top: 60px;
+        right: 1.5rem;
+        border-radius: 1rem;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(201, 162, 63, 0.3);
+      }
+      #menu.show {
+        display: flex;
+      }
+      #menuBtn {
+        display: block;
+      }
+      nav {
+        justify-content: space-between;
+      }
+    }
+
+    /* Profile Image */
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 5px solid #c9a23f;
+      object-fit: cover;
+      box-shadow: 0 4px 14px rgba(201, 162, 63, 0.5);
+      transition: box-shadow 0.3s ease;
+      margin: 0 auto 1.25rem auto;
+      display: block;
+    }
+
+    .profile-img:hover,
+    .profile-img:focus {
+      box-shadow: 0 0 15px 4px #c9a23f;
+      outline: none;
+    }
+
+    /* Section titles */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: #c9a23f;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      text-align: center;
+      margin-top: 6rem;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      font-size: 1.125rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Bio text */
+    .bio {
+      color: #ddd6b8;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto 1.75rem auto;
+      text-align: center;
+    }
+
+    /* Resume download button */
+    .btn-resume {
+      background-color: #c9a23f;
+      color: #0d1117;
+      font-weight: 600;
+      padding: 0.65rem 2rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 6px 10px rgba(201, 162, 63, 0.4);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-size: 1rem;
+      margin: 0 auto;
+    }
+
+    .btn-resume:hover,
+    .btn-resume:focus {
+      background-color: #f5d07e;
+      color: #161b22;
+      outline: none;
+      box-shadow: 0 6px 15px rgba(245, 208, 126, 0.7);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background-color: #0d1117;
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 5px 15px rgba(201, 162, 63, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .skill-category:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(201, 162, 63, 0.35);
+    }
+
+    .skill-category h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      color: #f5d07e;
+    }
+
+    .skill-category ul {
+      list-style-type: disc;
+      margin-left: 1.2rem;
+      color: #ddd6b8;
+    }
+
+    /* Project details */
+    details {
+      background-color: #0d1117;
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 4px 10px rgba(201, 162, 63, 0.15);
+      margin-bottom: 1rem;
+      cursor: pointer;
+      color: #ddd6b8;
+      transition: background-color 0.3s ease;
+    }
+
+    details[open] {
+      background-color: #161b22;
+    }
+
+    details summary {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #c9a23f;
+      outline: none;
+      user-select: none;
+      list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* Certifications */
+    .cert-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.25rem;
+      justify-items: center;
+    }
+
+    .cert-item {
+      position: relative;
+      background-color: #0d1117;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(201, 162, 63, 0.3);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .cert-item:hover,
+    .cert-item:focus-within {
+      transform: scale(1.07);
+      box-shadow: 0 12px 30px rgba(201, 162, 63, 0.5);
+      outline: none;
+    }
+
+    .cert-img {
+      display: block;
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 1rem 1rem 0 0;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .cert-download {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background-color: #c9a23f;
+      color: #0d1117;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.85rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(201, 162, 63, 0.6);
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .cert-download:hover,
+    .cert-download:focus {
+      opacity: 1;
+      outline: none;
+    }
+
+    .cert-caption {
+      text-align: center;
+      padding: 0.5rem 0 1rem;
+      color: #ddd6b8;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Contact Section */
+    .contact-info p {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #ddd6b8;
+    }
+
+    .contact-info a {
+      color: #c9a23f;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover,
+    .contact-info a:focus {
+      color: #f5d07e;
+      outline: none;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #707070;
+      padding: 1rem 0 2rem;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Smooth scroll for browsers */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Font Awesome icon colors */
+    .icon-link {
+      color: #c9a23f;
+      font-size: 1.4rem;
+      margin: 0 0.6rem;
+      transition: color 0.3s ease;
+    }
+    .icon-link:hover,
+    .icon-link:focus {
+      color: #f5d07e;
+      outline: none;
+    }
+
+    /* Lightbox Overlay */
+    #lightboxOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(13, 17, 23, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      cursor: zoom-out;
+    }
+
+    #lightboxOverlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(201, 162, 63, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header and Navbar -->
+  <header role="banner" aria-label="Primary Navigation">
+    <nav>
+      <a href="#about" class="font-bold text-xl tracking-tight" aria-label="Home: Lohit Kumbar">Lohit Kumbar</a>
+      <button id="menuBtn" aria-controls="menu" aria-expanded="false" aria-label="Toggle menu" title="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div id="menu" class="flex gap-6" role="navigation" aria-label="Primary menu">
+        <a href="#about" class="hover:underline focus:underline">About</a>
+        <a href="#skills" class="hover:underline focus:underline">Skills</a>
+        <a href="#projects" class="hover:underline focus:underline">Projects</a>
+        <a href="#certifications" class="hover:underline focus:underline">Certifications</a>
+        <a href="#contact" class="hover:underline focus:underline">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- About Me Section -->
+  <section id="about" aria-label="About Me" tabindex="0" data-aos="fade-up">
+    <img
+      src="dp_lohit.jpg"
+      alt="Photo of Lohit Kumbar"
+      class="profile-img"
+      tabindex="0"
+    />
+    <h1 tabindex="0">Lohit Kumbar</h1>
+    <h2 tabindex="0" class="mb-4">Mechanical Engineer | Junior Prototyping Engineer</h2>
+    <p class="bio" tabindex="0">
+      Mechanical Engineer with R&D experience as a Prototyping Engineer at Drishti Works Pvt Ltd. Skilled in CAD design, fabrication, QC, and prototype development.
+    </p>
+    <div style="text-align:center;">
+      <a href="Lohit_K_resume.pdf" download class="btn-resume" aria-label="Download Resume of Lohit Kumbar" tabindex="0">
+        <i class="fas fa-download mr-2"></i>Download Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" aria-label="Skills" tabindex="0" data-aos="fade-up" data-aos-delay="100">
+    <h3>Skills</h3>
+    <div class="skills-grid">
+      <div class="skill-category" tabindex="0" aria-labelledby="cad-tools-label">
+        <h4 id="cad-tools-label"><i class="fas fa-cogs"></i> CAD Tools</h4>
+        <ul>
+          <li>SolidWorks</li>
+          <li>Fusion 360</li>
+          <li>AutoCAD</li>
+          <li>CATIA</li>
+        </ul>
+      </div>
+      <div class="skill-category" tabindex="0" aria-labelledby="fabrication-label">
+        <h4 id="fabrication-label"><i class="fas fa-hammer"></i> Fabrication & Assembly</h4>
+        <ul>
+          <li>Fabrication & Assembly</li>
+        </ul>
+      </div>
+      <div class="skill-category" tabindex="0" aria-labelledby="printing-label">
+        <h4 id="printing-label"><i class="fas fa-print"></i> 3D Printing & Prototyping</h4>
+        <ul>
+          <li>3D Printing & Prototyping</li>
+        </ul>
+      </div>
+      <div class="skill-category" tabindex="0" aria-labelledby="project-label">
+        <h4 id="project-label"><i class="fas fa-tasks"></i> Project Management</h4>
+        <ul>
+          <li>Project Management</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" aria-label="Projects" tabindex="0" data-aos="fade-up" data-aos-delay="200">
+    <h3>Projects</h3>
+    <details tabindex="0" aria-expanded="false" aria-controls="smart-helmet-desc" role="group">
+      <summary id="smart-helmet-desc" aria-label="Smart Helmet project summary">
+        Smart Helmet
+      </summary>
+      <p class="pl-4 pt-2 text-gray-300">IoT-based safety prototype.</p>
+    </details>
+    <details tabindex="0" aria-expanded="false" aria-controls="anti-fire-desc" role="group">
+      <summary id="anti-fire-desc" aria-label="Anti-Fire System in an Industry project summary">
+        Anti-Fire System in an Industry
+      </summary>
+      <p class="pl-4 pt-2 text-gray-300">Automated fire suppression concept model.</p>
+    </details>
+    <details tabindex="0" aria-expanded="false" aria-controls="filament-manufacturing-desc" role="group">
+      <summary id="filament-manufacturing-desc" aria-label="3D Printer Filament Manufacturing Unit project summary">
+        3D Printer Filament Manufacturing Unit Using PET Bottles
+      </summary>
+      <p class="pl-4 pt-2 text-gray-300">Sustainable recycling project.</p>
+    </details>
+    <details tabindex="0" aria-expanded="false" aria-controls="dust-pollution-desc" role="group">
+      <summary id="dust-pollution-desc" aria-label="Dust Pollution Control project summary">
+        Dust Pollution Control for a Stone Crushing Unit
+      </summary>
+      <p class="pl-4 pt-2 text-gray-300">Environmental solution prototype.</p>
+    </details>
+    <details tabindex="0" aria-expanded="false" aria-controls="geneva-mechanism-desc" role="group">
+      <summary id="geneva-mechanism-desc" aria-label="Geneva Mechanism project summary">
+        Geneva Mechanism for Production Line Conveyor System
+      </summary>
+      <p class="pl-4 pt-2 text-gray-300">Intermittent motion control demonstration.</p>
+    </details>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" aria-label="Certifications" tabindex="0" data-aos="fade-up" data-aos-delay="300">
+    <h3>Certifications</h3>
+    <div class="cert-gallery">
+      <div class="cert-item" tabindex="0">
+        <img
+          src="cert_fusion360.jpg"
+          alt="Fusion 360 Certificate"
+          class="cert-img"
+          loading="lazy"
+          role="button"
+          aria-label="View Fusion 360 Certificate"
+          tabindex="0"
+          onclick="openLightbox(this)"
+          onkeydown="if(event.key==='Enter') openLightbox(this)"
+        />
+        <a
+          href="cert_fusion360.jpg"
+          download
+          class="cert-download"
+          aria-label="Download Fusion 360 Certificate"
+          tabindex="0"
+          ><i class="fas fa-download"></i
+        ></a>
+        <div class="cert-caption">Fusion 360 Certificate</div>
+      </div>
+      <div class="cert-item" tabindex="0">
+        <img
+          src="cert_matlab.jpg"
+          alt="MATLAB Certificate"
+          class="cert-img"
+          loading="lazy"
+          role="button"
+          aria-label="View MATLAB Certificate"
+          tabindex="0"
+          onclick="openLightbox(this)"
+          onkeydown="if(event.key==='Enter') openLightbox(this)"
+        />
+        <a
+          href="cert_matlab.jpg"
+          download
+          class="cert-download"
+          aria-label="Download MATLAB Certificate"
+          tabindex="0"
+          ><i class="fas fa-download"></i
+        ></a>
+        <div class="cert-caption">MATLAB Certificate</div>
+      </div>
+      <div class="cert-item" tabindex="0">
+        <img
+          src="cert_lsswb.jpg"
+          alt="Lean Six Sigma White Belt"
+          class="cert-img"
+          loading="lazy"
+          role="button"
+          aria-label="View Lean Six Sigma White Belt Certificate"
+          tabindex="0"
+          onclick="openLightbox(this)"
+          onkeydown="if(event.key==='Enter') openLightbox(this)"
+        />
+        <a
+          href="cert_lsswb.jpg"
+          download
+          class="cert-download"
+          aria-label="Download Lean Six Sigma White Belt Certificate"
+          tabindex="0"
+          ><i class="fas fa-download"></i
+        ></a>
+        <div class="cert-caption">Lean Six Sigma White Belt</div>
+      </div>
+      <div class="cert-item" tabindex="0">
+        <img
+          src="cert_publicspeaking.jpg"
+          alt="Public Speaking Certificate"
+          class="cert-img"
+          loading="lazy"
+          role="button"
+          aria-label="View Public Speaking Certificate"
+          tabindex="0"
+          onclick="openLightbox(this)"
+          onkeydown="if(event.key==='Enter') openLightbox(this)"
+        />
+        <a
+          href="cert_publicspeaking.jpg"
+          download
+          class="cert-download"
+          aria-label="Download Public Speaking Certificate"
+          tabindex="0"
+          ><i class="fas fa-download"></i
+        ></a>
+        <div class="cert-caption">Public Speaking Certificate</div>
+      </div>
+      <div class="cert-item" tabindex="0">
+        <img
+          src="cert_organizational.jpg"
+          alt="Organizational Behaviour Certificate"
+          class="cert-img"
+          loading="lazy"
+          role="button"
+          aria-label="View Organizational Behaviour Certificate"
+          tabindex="0"
+          onclick="openLightbox(this)"
+          onkeydown="if(event.key==='Enter') openLightbox(this)"
+        />
+        <a
+          href="cert_organizational.jpg"
+          download
+          class="cert-download"
+          aria-label="Download Organizational Behaviour Certificate"
+          tabindex="0"
+          ><i class="fas fa-download"></i
+        ></a>
+        <div class="cert-caption">Organizational Behaviour Certificate</div>
+      </div>
+      <div class="cert-item" tabindex="0">
+        <img
+          src="cert_solidworks.jpg"
+          alt="SolidWorks Certificate"
+          class="cert-img"
+          loading="lazy"
+          role="button"
+          aria-label="View SolidWorks Certificate"
+          tabindex="0"
+          onclick="openLightbox(this)"
+          onkeydown="if(event.key==='Enter') openLightbox(this)"
+        />
+        <a
+          href="cert_solidworks.jpg"
+          download
+          class="cert-download"
+          aria-label="Download SolidWorks Certificate"
+          tabindex="0"
+          ><i class="fas fa-download"></i
+        ></a>
+        <div class="cert-caption">SolidWorks Certificate</div>
+      </div>
+      <div class="cert-item" tabindex="0">
+        <img
+          src="cert_ebusiness.jpg"
+          alt="E-Business Certificate"
+          class="cert-img"
+          loading="lazy"
+          role="button"
+          aria-label="View E-Business Certificate"
+          tabindex="0"
+          onclick="openLightbox(this)"
+          onkeydown="if(event.key==='Enter') openLightbox(this)"
+        />
+        <a
+          href="cert_ebusiness.jpg"
+          download
+          class="cert-download"
+          aria-label="Download E-Business Certificate"
+          tabindex="0"
+          ><i class="fas fa-download"></i
+        ></a>
+        <div class="cert-caption">E-Business Certificate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" aria-label="Contact" tabindex="0" data-aos="fade-up" data-aos-delay="400">
+    <h3>Contact</h3>
+    <div class="contact-info">
+      <p>Email: <a href="mailto:lohitkumbarofficial@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Send email to Lohit Kumbar">lohitkumbarofficial@gmail.com <i class="fas fa-envelope"></i></a></p>
+      <p>Phone: <a href="tel:+918329131081" target="_blank" rel="noopener noreferrer" aria-label="Call Lohit Kumbar">+91 83291 31081 <i class="fas fa-phone"></i></a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/lohit-kumbar-854242239" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile of Lohit Kumbar">linkedin.com/in/lohit-kumbar-854242239 <i class="fab fa-linkedin"></i></a></p>
+      <p>Instagram: <a href="https://www.instagram.com/lohit__kumbar__" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile of Lohit Kumbar">@lohit__kumbar__ <i class="fab fa-instagram"></i></a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer aria-label="Page Footer" tabindex="0">
+    © 2025 Lohit Kumbar. All Rights Reserved.
+  </footer>
+
+  <!-- Lightbox Overlay -->
+  <div id="lightboxOverlay" tabindex="0" aria-label="Image preview" role="dialog" aria-modal="true" aria-hidden="true" onclick="closeLightbox()" onkeydown="if(event.key==='Escape') closeLightbox()">
+    <img src="" alt="Expanded certificate image" id="lightboxImage" />
+  </div>
+
+  <!-- Inline JavaScript -->
+  <script>
+    AOS.init({
+      once: true,
+      duration: 700,
+      easing: 'ease-in-out',
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
+      menuBtn.setAttribute('aria-expanded', !expanded);
+      menu.classList.toggle('show');
+    });
+
+    // Background gear rotation speed control on scroll
+    let timeoutId;
+    const body = document.body;
+    window.addEventListener('scroll', () => {
+      body.classList.add('rotating-fast');
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        body.classList.remove('rotating-fast');
+      }, 1500);
+    });
+
+    // Lightbox functionality for certification images
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImage = document.getElementById('lightboxImage');
+
+    function openLightbox(img) {
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+      lightboxOverlay.style.display = 'flex';
+      lightboxOverlay.setAttribute('aria-hidden', 'false');
+      lightboxOverlay.focus();
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightboxOverlay.style.display = 'none';
+      lightboxOverlay.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+      document.body.style.overflow = '';
+    }
+
+    // Accessibility: trap focus inside lightbox when open
+    lightboxOverlay.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        lightboxOverlay.focus();
+      }
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
