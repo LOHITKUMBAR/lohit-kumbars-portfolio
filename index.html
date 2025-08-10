@@ -1,57 +1,118 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" class="scroll-smooth" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lohit Kumbar | Mechanical Engineer Portfolio</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts Inter -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <!-- AOS Animation -->
-  <link
-    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
-    rel="stylesheet"
-  />
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- AOS Animation CDN -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- Font Awesome CDN -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet"
-  />
+  <!-- FontAwesome CDN -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
   <style>
-    /* Font and base */
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0d1117;
-      color: #c9a23f;
-      scroll-behavior: smooth;
+      color: #d1d5db; /* gray-300 */
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
+      padding-top: 4.5rem; /* for fixed navbar */
+    }
+    a {
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #c9a23f;
+      outline: none;
+    }
+    /* Rounded section containers with soft shadows */
+    section {
+      background: #161b22;
+      border-radius: 0.75rem; /* rounded-xl */
+      box-shadow: 0 4px 12px rgb(201 162 63 / 0.2);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
     }
 
-    /* Background gear SVG as rotating blurred mesh */
-    body::before {
-      content: '';
+    /* Navbar styling */
+    header {
+      background: #161b22cc; /* translucent charcoal */
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 2px 8px rgb(201 162 63 / 0.25);
       position: fixed;
-      top: -150px;
-      left: -150px;
-      width: 700px;
-      height: 700px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 200 200"><g fill="rgba(201,162,63,0.06)"><circle cx="100" cy="100" r="80" stroke="none"/><g><rect x="98" y="10" width="4" height="20"/><rect x="98" y="170" width="4" height="20"/><rect x="170" y="98" width="20" height="4"/><rect x="10" y="98" width="20" height="4"/><rect x="155" y="45" width="20" height="4" transform="rotate(45 165 47)"/><rect x="25" y="45" width="20" height="4" transform="rotate(-45 35 47)"/><rect x="155" y="145" width="20" height="4" transform="rotate(-45 165 147)"/><rect x="25" y="145" width="20" height="4" transform="rotate(45 35 147)"/></g></g></svg>') no-repeat center;
-      background-size: contain;
-      filter: blur(6px);
-      opacity: 0.12;
-      z-index: 0;
-      animation: rotateGear 120s linear infinite;
-      transform-origin: 50% 50%;
+      width: 100%;
+      top: 0;
+      z-index: 50;
+    }
+    header h1 {
+      color: #c9a23f;
+    }
+    nav a {
+      color: #d1d5db;
+      font-weight: 600;
+    }
+    nav a:hover, nav a:focus {
+      color: #c9a23f;
+      outline: none;
+    }
+    #menuBtn {
+      color: #c9a23f;
+      font-weight: 700;
+    }
+    #menu {
+      transition: max-height 0.3s ease;
     }
 
-    @keyframes rotateGear {
+    /* Profile image container with gears left and right */
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+    .profile-img {
+      border: 4px solid #c9a23f;
+      border-radius: 9999px;
+      width: 10rem;
+      height: 10rem;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgb(201 162 63 / 0.6);
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+    /* Gear styling */
+    .gear {
+      position: absolute;
+      top: 50%;
+      width: 3.5rem;
+      height: 3.5rem;
+      fill: rgba(201, 162, 63, 0.15);
+      transform-origin: center;
+      user-select: none;
+      filter: drop-shadow(0 0 3px rgba(201,162,63,0.3));
+      animation: rotateGearSlow 60s linear infinite;
+      pointer-events: none;
+      translate: translateY(-50%);
+    }
+    .gear.left {
+      left: -4.5rem;
+      top: 50%;
+      transform-origin: center center;
+    }
+    .gear.right {
+      right: -4.5rem;
+      top: 50%;
+      transform-origin: center center;
+      animation-direction: reverse;
+    }
+
+    @keyframes rotateGearSlow {
       from {
         transform: rotate(0deg);
       }
@@ -60,742 +121,475 @@
       }
     }
 
-    /* Slow rotation by default */
-    body.rotating-fast::before {
-      animation-duration: 40s !important;
-    }
-
-    /* Section styling */
-    section {
-      position: relative;
-      z-index: 1;
-      margin: 2rem auto;
-      max-width: 900px;
-      background-color: #161b22;
-      border-radius: 1rem;
-      padding: 2rem 2.5rem;
-      box-shadow: 0 8px 24px rgba(201, 162, 63, 0.15);
-    }
-
-    /* Header styling */
-    header {
-      background-color: #161b22cc; /* translucent charcoal */
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 999;
-      box-shadow: 0 2px 8px rgba(201, 162, 63, 0.4);
-      backdrop-filter: saturate(180%) blur(10px);
-    }
-
-    /* Nav inside header */
-    nav {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      color: #c9a23f;
-      font-size: 1.125rem;
-    }
-
-    nav a {
-      color: #c9a23f;
-      padding: 0.25rem 1rem;
-      border-radius: 0.5rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    nav a:hover,
-    nav a:focus {
-      background-color: #c9a23f;
-      color: #0d1117;
-      outline: none;
-    }
-
-    /* Mobile menu button */
-    #menuBtn {
-      display: none;
-      font-size: 2rem;
-      background: none;
-      border: none;
-      color: #c9a23f;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    #menuBtn:hover,
-    #menuBtn:focus {
-      color: #f5d07e;
-      outline: none;
-    }
-
-    /* Nav links container */
-    #menu {
-      display: flex;
-      gap: 1rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      #menu {
-        display: none;
-        flex-direction: column;
-        background-color: #161b22;
-        position: absolute;
-        top: 60px;
-        right: 1.5rem;
-        border-radius: 1rem;
-        padding: 1rem 1.5rem;
-        box-shadow: 0 8px 24px rgba(201, 162, 63, 0.3);
-      }
-      #menu.show {
-        display: flex;
-      }
-      #menuBtn {
-        display: block;
-      }
-      nav {
-        justify-content: space-between;
-      }
-    }
-
-    /* Profile Image */
-    .profile-img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      border: 5px solid #c9a23f;
-      object-fit: cover;
-      box-shadow: 0 4px 14px rgba(201, 162, 63, 0.5);
-      transition: box-shadow 0.3s ease;
-      margin: 0 auto 1.25rem auto;
-      display: block;
-    }
-
-    .profile-img:hover,
-    .profile-img:focus {
-      box-shadow: 0 0 15px 4px #c9a23f;
-      outline: none;
-    }
-
     /* Section titles */
-    h1,
-    h2,
-    h3,
-    h4 {
-      color: #c9a23f;
-      font-weight: 700;
-    }
-
-    h1 {
-      font-size: 2.25rem;
-      text-align: center;
-      margin-top: 6rem;
-      margin-bottom: 0.25rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
     h3 {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-    }
-
-    h4 {
-      font-size: 1.125rem;
-      margin-bottom: 0.25rem;
-    }
-
-    /* Bio text */
-    .bio {
-      color: #ddd6b8;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      max-width: 720px;
-      margin: 0 auto 1.75rem auto;
-      text-align: center;
-    }
-
-    /* Resume download button */
-    .btn-resume {
-      background-color: #c9a23f;
-      color: #0d1117;
-      font-weight: 600;
-      padding: 0.65rem 2rem;
-      border-radius: 0.75rem;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 6px 10px rgba(201, 162, 63, 0.4);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      font-size: 1rem;
-      margin: 0 auto;
-    }
-
-    .btn-resume:hover,
-    .btn-resume:focus {
-      background-color: #f5d07e;
-      color: #161b22;
-      outline: none;
-      box-shadow: 0 6px 15px rgba(245, 208, 126, 0.7);
-    }
-
-    /* Skills Section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-category {
-      background-color: #0d1117;
-      border-radius: 0.75rem;
-      padding: 1rem 1.25rem;
-      box-shadow: 0 5px 15px rgba(201, 162, 63, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .skill-category:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 24px rgba(201, 162, 63, 0.35);
-    }
-
-    .skill-category h4 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-      color: #f5d07e;
-    }
-
-    .skill-category ul {
-      list-style-type: disc;
-      margin-left: 1.2rem;
-      color: #ddd6b8;
-    }
-
-    /* Project details */
-    details {
-      background-color: #0d1117;
-      border-radius: 0.75rem;
-      padding: 1rem 1.25rem;
-      box-shadow: 0 4px 10px rgba(201, 162, 63, 0.15);
-      margin-bottom: 1rem;
-      cursor: pointer;
-      color: #ddd6b8;
-      transition: background-color 0.3s ease;
-    }
-
-    details[open] {
-      background-color: #161b22;
-    }
-
-    details summary {
-      font-weight: 600;
-      font-size: 1.1rem;
       color: #c9a23f;
-      outline: none;
-      user-select: none;
+    }
+
+    /* Project details summary styling */
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      outline-offset: 4px;
       list-style: none;
     }
-
     details summary::-webkit-details-marker {
       display: none;
     }
-
-    /* Certifications */
-    .cert-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.25rem;
-      justify-items: center;
+    details[open] summary::after {
+      content: '▲';
+      float: right;
+      font-size: 0.9rem;
+      margin-left: 0.25rem;
+    }
+    details summary::after {
+      content: '▼';
+      float: right;
+      font-size: 0.9rem;
+      margin-left: 0.25rem;
+    }
+    details p {
+      margin-top: 0.5rem;
+      color: #d1d5db;
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
 
-    .cert-item {
-      position: relative;
-      background-color: #0d1117;
-      border-radius: 1rem;
-      box-shadow: 0 8px 20px rgba(201, 162, 63, 0.3);
-      overflow: hidden;
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 1.5rem;
+      color: #d1d5db;
+    }
+    .skill-category h4 {
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #c9a23f;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Certifications images */
+    .cert-image {
+      width: 100%;
+      border-radius: 0.5rem;
       cursor: pointer;
       transition: transform 0.3s ease;
+      box-shadow: 0 0 12px rgba(0,0,0,0.6);
     }
-
-    .cert-item:hover,
-    .cert-item:focus-within {
-      transform: scale(1.07);
-      box-shadow: 0 12px 30px rgba(201, 162, 63, 0.5);
+    .cert-image:hover,
+    .cert-image:focus {
+      transform: scale(1.05);
       outline: none;
-    }
-
-    .cert-img {
-      display: block;
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 1rem 1rem 0 0;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .cert-download {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      background-color: #c9a23f;
-      color: #0d1117;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.85rem;
-      border-radius: 0.5rem;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(201, 162, 63, 0.6);
-      opacity: 0.9;
-      transition: opacity 0.3s ease;
-    }
-
-    .cert-download:hover,
-    .cert-download:focus {
-      opacity: 1;
-      outline: none;
-    }
-
-    .cert-caption {
-      text-align: center;
-      padding: 0.5rem 0 1rem;
-      color: #ddd6b8;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    /* Contact Section */
-    .contact-info p {
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-      color: #ddd6b8;
-    }
-
-    .contact-info a {
-      color: #c9a23f;
-      font-weight: 600;
-      transition: color 0.3s ease;
-      text-decoration: none;
-    }
-
-    .contact-info a:hover,
-    .contact-info a:focus {
-      color: #f5d07e;
-      outline: none;
-      text-decoration: underline;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #707070;
-      padding: 1rem 0 2rem;
-      user-select: none;
+      box-shadow: 0 0 20px #c9a23faa;
+      z-index: 20;
       position: relative;
-      z-index: 1;
+    }
+    .btn-resume {
+      background-color: #c9a23f;
+      color: #161b22;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 0.375rem;
+      margin-top: 0.4rem;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-resume:hover,
+    .btn-resume:focus {
+      background-color: #a3862c;
+      outline: none;
+      color: #161b22;
     }
 
-    /* Smooth scroll for browsers */
-    html {
-      scroll-behavior: smooth;
+    /* Contact items */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #d1d5db;
     }
-
-    /* Font Awesome icon colors */
-    .icon-link {
+    .contact-item i {
       color: #c9a23f;
-      font-size: 1.4rem;
-      margin: 0 0.6rem;
-      transition: color 0.3s ease;
+      min-width: 1.3rem;
+      text-align: center;
     }
-    .icon-link:hover,
-    .icon-link:focus {
-      color: #f5d07e;
+    .contact-item a {
+      color: #c9a23f;
+      font-weight: 600;
+    }
+    .contact-item a:hover,
+    .contact-item a:focus {
+      color: #f3d365;
       outline: none;
     }
 
-    /* Lightbox Overlay */
+    /* Lightbox overlay */
     #lightboxOverlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(13, 17, 23, 0.95);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      cursor: zoom-out;
+      z-index: 1000;
     }
-
     #lightboxOverlay img {
       max-width: 90vw;
       max-height: 90vh;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(201, 162, 63, 0.8);
+      border-radius: 0.75rem;
+      box-shadow: 0 0 25px #c9a23faa;
+    }
+    #lightboxOverlay:focus {
+      outline: none;
     }
   </style>
 </head>
 <body>
-  <!-- Header and Navbar -->
-  <header role="banner" aria-label="Primary Navigation">
-    <nav>
-      <a href="#about" class="font-bold text-xl tracking-tight" aria-label="Home: Lohit Kumbar">Lohit Kumbar</a>
-      <button id="menuBtn" aria-controls="menu" aria-expanded="false" aria-label="Toggle menu" title="Toggle menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div id="menu" class="flex gap-6" role="navigation" aria-label="Primary menu">
-        <a href="#about" class="hover:underline focus:underline">About</a>
-        <a href="#skills" class="hover:underline focus:underline">Skills</a>
-        <a href="#projects" class="hover:underline focus:underline">Projects</a>
-        <a href="#certifications" class="hover:underline focus:underline">Certifications</a>
-        <a href="#contact" class="hover:underline focus:underline">Contact</a>
-      </div>
+
+  <!-- Navbar -->
+  <header class="flex items-center justify-between px-6 py-3 max-w-6xl mx-auto" role="banner">
+    <h1 class="text-2xl font-bold">Lohit Kumbar</h1>
+    <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-3xl text-[#c9a23f] font-bold">☰</button>
+    <nav id="menu" class="hidden md:flex space-x-8 font-semibold text-gray-300" role="navigation">
+      <a href="#about" class="hover:text-[#c9a23f] focus:outline-none focus:text-[#c9a23f]">About</a>
+      <a href="#experience" class="hover:text-[#c9a23f] focus:outline-none focus:text-[#c9a23f]">Experience</a>
+      <a href="#projects" class="hover:text-[#c9a23f] focus:outline-none focus:text-[#c9a23f]">Projects</a>
+      <a href="#skills" class="hover:text-[#c9a23f] focus:outline-none focus:text-[#c9a23f]">Skills</a>
+      <a href="#certifications" class="hover:text-[#c9a23f] focus:outline-none focus:text-[#c9a23f]">Certifications</a>
+      <a href="#contact" class="hover:text-[#c9a23f] focus:outline-none focus:text-[#c9a23f]">Contact</a>
     </nav>
   </header>
 
-  <!-- About Me Section -->
-  <section id="about" aria-label="About Me" tabindex="0" data-aos="fade-up">
-    <img
-      src="dp_lohit.jpg"
-      alt="Photo of Lohit Kumbar"
-      class="profile-img"
-      tabindex="0"
-    />
-    <h1 tabindex="0">Lohit Kumbar</h1>
-    <h2 tabindex="0" class="mb-4">Mechanical Engineer | Junior Prototyping Engineer</h2>
-    <p class="bio" tabindex="0">
-      Mechanical Engineer with R&D experience as a Prototyping Engineer at Drishti Works Pvt Ltd. Skilled in CAD design, fabrication, QC, and prototype development.
-    </p>
-    <div style="text-align:center;">
-      <a href="Lohit_K_resume.pdf" download class="btn-resume" aria-label="Download Resume of Lohit Kumbar" tabindex="0">
-        <i class="fas fa-download mr-2"></i>Download Resume
-      </a>
-    </div>
-  </section>
+  <!-- Main Content -->
+  <main class="max-w-5xl mx-auto px-6">
 
-  <!-- Skills Section -->
-  <section id="skills" aria-label="Skills" tabindex="0" data-aos="fade-up" data-aos-delay="100">
-    <h3>Skills</h3>
-    <div class="skills-grid">
-      <div class="skill-category" tabindex="0" aria-labelledby="cad-tools-label">
-        <h4 id="cad-tools-label"><i class="fas fa-cogs"></i> CAD Tools</h4>
-        <ul>
-          <li>SolidWorks</li>
-          <li>Fusion 360</li>
-          <li>AutoCAD</li>
-          <li>CATIA</li>
-        </ul>
-      </div>
-      <div class="skill-category" tabindex="0" aria-labelledby="fabrication-label">
-        <h4 id="fabrication-label"><i class="fas fa-hammer"></i> Fabrication & Assembly</h4>
-        <ul>
-          <li>Fabrication & Assembly</li>
-        </ul>
-      </div>
-      <div class="skill-category" tabindex="0" aria-labelledby="printing-label">
-        <h4 id="printing-label"><i class="fas fa-print"></i> 3D Printing & Prototyping</h4>
-        <ul>
-          <li>3D Printing & Prototyping</li>
-        </ul>
-      </div>
-      <div class="skill-category" tabindex="0" aria-labelledby="project-label">
-        <h4 id="project-label"><i class="fas fa-tasks"></i> Project Management</h4>
-        <ul>
-          <li>Project Management</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <!-- About Me with Gears -->
+    <section id="about" tabindex="0" aria-labelledby="about-title" class="text-center mt-10" data-aos="fade-up">
+      <div class="profile-container mx-auto relative w-max">
+        <!-- Left Gear SVG -->
+        <svg class="gear left" viewBox="0 0 100 100" aria-hidden="true" focusable="false" >
+          <g transform="translate(50,50)">
+            <circle r="30" fill="rgba(201,162,63,0.15)" />
+            <!-- 14 teeth -->
+            <g stroke="rgba(201,162,63,0.3)" stroke-width="3" stroke-linejoin="round" fill="none">
+              <g id="teeth">
+                <!-- Generate teeth using rotate transforms -->
+                <!-- We use 14 teeth spaced evenly 360/14 = 25.71deg -->
+                <rect x="27" y="-5" width="10" height="10" rx="2" ry="2" fill="rgba(201,162,63,0.3)" />
+                <use href="#teeth" transform="rotate(25.71)" />
+                <use href="#teeth" transform="rotate(51.42)" />
+                <use href="#teeth" transform="rotate(77.13)" />
+                <use href="#teeth" transform="rotate(102.84)" />
+                <use href="#teeth" transform="rotate(128.55)" />
+                <use href="#teeth" transform="rotate(154.26)" />
+                <use href="#teeth" transform="rotate(179.97)" />
+                <use href="#teeth" transform="rotate(205.68)" />
+                <use href="#teeth" transform="rotate(231.39)" />
+                <use href="#teeth" transform="rotate(257.1)" />
+                <use href="#teeth" transform="rotate(282.81)" />
+                <use href="#teeth" transform="rotate(308.52)" />
+                <use href="#teeth" transform="rotate(334.23)" />
+              </g>
+            </g>
+            <circle r="18" fill="rgba(201,162,63,0.25)" />
+            <circle r="12" fill="#0d1117" />
+            <circle r="8" fill="rgba(201,162,63,0.35)" />
+          </g>
+        </svg>
 
-  <!-- Projects Section -->
-  <section id="projects" aria-label="Projects" tabindex="0" data-aos="fade-up" data-aos-delay="200">
-    <h3>Projects</h3>
-    <details tabindex="0" aria-expanded="false" aria-controls="smart-helmet-desc" role="group">
-      <summary id="smart-helmet-desc" aria-label="Smart Helmet project summary">
-        Smart Helmet
-      </summary>
-      <p class="pl-4 pt-2 text-gray-300">IoT-based safety prototype.</p>
-    </details>
-    <details tabindex="0" aria-expanded="false" aria-controls="anti-fire-desc" role="group">
-      <summary id="anti-fire-desc" aria-label="Anti-Fire System in an Industry project summary">
-        Anti-Fire System in an Industry
-      </summary>
-      <p class="pl-4 pt-2 text-gray-300">Automated fire suppression concept model.</p>
-    </details>
-    <details tabindex="0" aria-expanded="false" aria-controls="filament-manufacturing-desc" role="group">
-      <summary id="filament-manufacturing-desc" aria-label="3D Printer Filament Manufacturing Unit project summary">
-        3D Printer Filament Manufacturing Unit Using PET Bottles
-      </summary>
-      <p class="pl-4 pt-2 text-gray-300">Sustainable recycling project.</p>
-    </details>
-    <details tabindex="0" aria-expanded="false" aria-controls="dust-pollution-desc" role="group">
-      <summary id="dust-pollution-desc" aria-label="Dust Pollution Control project summary">
-        Dust Pollution Control for a Stone Crushing Unit
-      </summary>
-      <p class="pl-4 pt-2 text-gray-300">Environmental solution prototype.</p>
-    </details>
-    <details tabindex="0" aria-expanded="false" aria-controls="geneva-mechanism-desc" role="group">
-      <summary id="geneva-mechanism-desc" aria-label="Geneva Mechanism project summary">
-        Geneva Mechanism for Production Line Conveyor System
-      </summary>
-      <p class="pl-4 pt-2 text-gray-300">Intermittent motion control demonstration.</p>
-    </details>
-  </section>
+        <img
+          src="dp_lohit.jpg"
+          alt="Lohit Kumbar"
+          class="profile-img shadow-lg"
+          width="160"
+          height="160"
+          loading="lazy"
+        />
 
-  <!-- Certifications Section -->
-  <section id="certifications" aria-label="Certifications" tabindex="0" data-aos="fade-up" data-aos-delay="300">
-    <h3>Certifications</h3>
-    <div class="cert-gallery">
-      <div class="cert-item" tabindex="0">
-        <img
-          src="cert_fusion360.jpg"
-          alt="Fusion 360 Certificate"
-          class="cert-img"
-          loading="lazy"
-          role="button"
-          aria-label="View Fusion 360 Certificate"
-          tabindex="0"
-          onclick="openLightbox(this)"
-          onkeydown="if(event.key==='Enter') openLightbox(this)"
-        />
-        <a
-          href="cert_fusion360.jpg"
-          download
-          class="cert-download"
-          aria-label="Download Fusion 360 Certificate"
-          tabindex="0"
-          ><i class="fas fa-download"></i
-        ></a>
-        <div class="cert-caption">Fusion 360 Certificate</div>
+        <!-- Right Gear SVG -->
+        <svg class="gear right" viewBox="0 0 100 100" aria-hidden="true" focusable="false" >
+          <g transform="translate(50,50)">
+            <circle r="30" fill="rgba(201,162,63,0.15)" />
+            <!-- 14 teeth -->
+            <g stroke="rgba(201,162,63,0.3)" stroke-width="3" stroke-linejoin="round" fill="none">
+              <g id="teeth2">
+                <rect x="27" y="-5" width="10" height="10" rx="2" ry="2" fill="rgba(201,162,63,0.3)" />
+                <use href="#teeth2" transform="rotate(25.71)" />
+                <use href="#teeth2" transform="rotate(51.42)" />
+                <use href="#teeth2" transform="rotate(77.13)" />
+                <use href="#teeth2" transform="rotate(102.84)" />
+                <use href="#teeth2" transform="rotate(128.55)" />
+                <use href="#teeth2" transform="rotate(154.26)" />
+                <use href="#teeth2" transform="rotate(179.97)" />
+                <use href="#teeth2" transform="rotate(205.68)" />
+                <use href="#teeth2" transform="rotate(231.39)" />
+                <use href="#teeth2" transform="rotate(257.1)" />
+                <use href="#teeth2" transform="rotate(282.81)" />
+                <use href="#teeth2" transform="rotate(308.52)" />
+                <use href="#teeth2" transform="rotate(334.23)" />
+              </g>
+            </g>
+            <circle r="18" fill="rgba(201,162,63,0.25)" />
+            <circle r="12" fill="#0d1117" />
+            <circle r="8" fill="rgba(201,162,63,0.35)" />
+          </g>
+        </svg>
       </div>
-      <div class="cert-item" tabindex="0">
-        <img
-          src="cert_matlab.jpg"
-          alt="MATLAB Certificate"
-          class="cert-img"
-          loading="lazy"
-          role="button"
-          aria-label="View MATLAB Certificate"
-          tabindex="0"
-          onclick="openLightbox(this)"
-          onkeydown="if(event.key==='Enter') openLightbox(this)"
-        />
-        <a
-          href="cert_matlab.jpg"
-          download
-          class="cert-download"
-          aria-label="Download MATLAB Certificate"
-          tabindex="0"
-          ><i class="fas fa-download"></i
-        ></a>
-        <div class="cert-caption">MATLAB Certificate</div>
-      </div>
-      <div class="cert-item" tabindex="0">
-        <img
-          src="cert_lsswb.jpg"
-          alt="Lean Six Sigma White Belt"
-          class="cert-img"
-          loading="lazy"
-          role="button"
-          aria-label="View Lean Six Sigma White Belt Certificate"
-          tabindex="0"
-          onclick="openLightbox(this)"
-          onkeydown="if(event.key==='Enter') openLightbox(this)"
-        />
-        <a
-          href="cert_lsswb.jpg"
-          download
-          class="cert-download"
-          aria-label="Download Lean Six Sigma White Belt Certificate"
-          tabindex="0"
-          ><i class="fas fa-download"></i
-        ></a>
-        <div class="cert-caption">Lean Six Sigma White Belt</div>
-      </div>
-      <div class="cert-item" tabindex="0">
-        <img
-          src="cert_publicspeaking.jpg"
-          alt="Public Speaking Certificate"
-          class="cert-img"
-          loading="lazy"
-          role="button"
-          aria-label="View Public Speaking Certificate"
-          tabindex="0"
-          onclick="openLightbox(this)"
-          onkeydown="if(event.key==='Enter') openLightbox(this)"
-        />
-        <a
-          href="cert_publicspeaking.jpg"
-          download
-          class="cert-download"
-          aria-label="Download Public Speaking Certificate"
-          tabindex="0"
-          ><i class="fas fa-download"></i
-        ></a>
-        <div class="cert-caption">Public Speaking Certificate</div>
-      </div>
-      <div class="cert-item" tabindex="0">
-        <img
-          src="cert_organizational.jpg"
-          alt="Organizational Behaviour Certificate"
-          class="cert-img"
-          loading="lazy"
-          role="button"
-          aria-label="View Organizational Behaviour Certificate"
-          tabindex="0"
-          onclick="openLightbox(this)"
-          onkeydown="if(event.key==='Enter') openLightbox(this)"
-        />
-        <a
-          href="cert_organizational.jpg"
-          download
-          class="cert-download"
-          aria-label="Download Organizational Behaviour Certificate"
-          tabindex="0"
-          ><i class="fas fa-download"></i
-        ></a>
-        <div class="cert-caption">Organizational Behaviour Certificate</div>
-      </div>
-      <div class="cert-item" tabindex="0">
-        <img
-          src="cert_solidworks.jpg"
-          alt="SolidWorks Certificate"
-          class="cert-img"
-          loading="lazy"
-          role="button"
-          aria-label="View SolidWorks Certificate"
-          tabindex="0"
-          onclick="openLightbox(this)"
-          onkeydown="if(event.key==='Enter') openLightbox(this)"
-        />
-        <a
-          href="cert_solidworks.jpg"
-          download
-          class="cert-download"
-          aria-label="Download SolidWorks Certificate"
-          tabindex="0"
-          ><i class="fas fa-download"></i
-        ></a>
-        <div class="cert-caption">SolidWorks Certificate</div>
-      </div>
-      <div class="cert-item" tabindex="0">
-        <img
-          src="cert_ebusiness.jpg"
-          alt="E-Business Certificate"
-          class="cert-img"
-          loading="lazy"
-          role="button"
-          aria-label="View E-Business Certificate"
-          tabindex="0"
-          onclick="openLightbox(this)"
-          onkeydown="if(event.key==='Enter') openLightbox(this)"
-        />
-        <a
-          href="cert_ebusiness.jpg"
-          download
-          class="cert-download"
-          aria-label="Download E-Business Certificate"
-          tabindex="0"
-          ><i class="fas fa-download"></i
-        ></a>
-        <div class="cert-caption">E-Business Certificate</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact" aria-label="Contact" tabindex="0" data-aos="fade-up" data-aos-delay="400">
-    <h3>Contact</h3>
-    <div class="contact-info">
-      <p>Email: <a href="mailto:lohitkumbarofficial@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Send email to Lohit Kumbar">lohitkumbarofficial@gmail.com <i class="fas fa-envelope"></i></a></p>
-      <p>Phone: <a href="tel:+918329131081" target="_blank" rel="noopener noreferrer" aria-label="Call Lohit Kumbar">+91 83291 31081 <i class="fas fa-phone"></i></a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/lohit-kumbar-854242239" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile of Lohit Kumbar">linkedin.com/in/lohit-kumbar-854242239 <i class="fab fa-linkedin"></i></a></p>
-      <p>Instagram: <a href="https://www.instagram.com/lohit__kumbar__" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile of Lohit Kumbar">@lohit__kumbar__ <i class="fab fa-instagram"></i></a></p>
-    </div>
-  </section>
+      <h2 class="text-4xl font-bold mt-6 text-[#c9a23f]">Lohit Kumbar</h2>
+      <p class="text-xl text-gray-400 mt-1">Mechanical Engineer | Junior Prototyping Engineer</p>
+      <p class="max-w-xl mx-auto mt-4 text-gray-300 leading-relaxed">
+        Mechanical Engineer with R&D experience as a Prototyping Engineer at Drishti Works Pvt Ltd. Skilled in CAD design, fabrication, QC, and prototype development.
+      </p>
+      <a
+        href="Lohit_K_resume.pdf"
+        download
+        class="inline-block mt-6 bg-[#c9a23f] text-[#161b22] font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        >⬇ Download Resume</a
+      >
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" tabindex="0" aria-labelledby="experience-title" data-aos="fade-left" data-aos-delay="100">
+      <h3 id="experience-title" class="text-3xl font-bold mb-6">🏢 Experience</h3>
+      <div class="space-y-8 text-gray-300 max-w-3xl mx-auto">
+        <div>
+          <h4 class="font-semibold text-xl">Junior Prototype Engineer – Drishti Works Pvt Ltd</h4>
+          <p class="text-sm text-gray-400">Oct 2024 – Present | Goa</p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Worked on real‑world EV conversion projects.</li>
+            <li>Proficient in Fusion 360 & SolidWorks for fixture and mount design.</li>
+            <li>Experience in fabrication, assembly processes, and quality control.</li>
+            <li>Handled BOM creation, procurement workflows, and vendor coordination.</li>
+            <li>Supervised fabrication teams ensuring quality output.</li>
+            <li>Performed root‑cause analysis and documented project processes.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-xl">Prototype Intern – Drishti Works Pvt Ltd</h4>
+          <p class="text-sm text-gray-400">Jul – Oct 2024 | Goa</p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Designed mounts & components for robotics applications.</li>
+            <li>Hands‑on experience in machining, fabrication, and assembly.</li>
+            <li>Created technical drawings & 2D drafting for manufacturing.</li>
+            <li>Maintained and calibrated BLDC motors and related systems.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-xl">Mechanical Maintenance Intern – Paradeep Phosphates Ltd</h4>
+          <p class="text-sm text-gray-400">Aug – Sep 2023 | Zuarinagar</p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Observed maintenance of pumps, gearboxes, turbines, and heat exchangers.</li>
+            <li>Learned preventive maintenance protocols and alignment techniques.</li>
+            <li>Developed knowledge of safety practices in chemical plant operations.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" tabindex="0" aria-labelledby="projects-title" data-aos="fade-up" data-aos-delay="100">
+      <h3 id="projects-title" class="text-3xl font-bold mb-6 text-[#c9a23f]">🛠️ Projects</h3>
+      <div class="max-w-3xl mx-auto text-gray-300 space-y-4">
+        <details tabindex="0" class="bg-[#161b22] rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <summary>Smart Helmet — IoT-based safety prototype.</summary>
+          <p class="mt-2 text-gray-400 text-sm">Designed a helmet integrated with IoT sensors to monitor safety parameters for construction workers and alert supervisors in real-time for enhanced on-site safety.</p>
+        </details>
+        <details tabindex="0" class="bg-[#161b22] rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <summary>Anti-Fire System in an Industry — Automated fire suppression concept model.</summary>
+          <p class="mt-2 text-gray-400 text-sm">Developed a mini model demonstrating automated detection and suppression of fire hazards using sensor-controlled extinguishing mechanisms to improve industrial safety.</p>
+        </details>
+        <details tabindex="0" class="bg-[#161b22] rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <summary>3D Printer Filament Manufacturing Unit Using PET Bottles — Sustainable recycling project.</summary>
+          <p class="mt-2 text-gray-400 text-sm">Created an eco-friendly process to recycle PET bottles into usable 3D printer filament, promoting sustainability and reducing plastic waste.</p>
+        </details>
+        <details tabindex="0" class="bg-[#161b22] rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <summary>Dust Pollution Control for a Stone Crushing Unit — Environmental solution prototype.</summary>
+          <p class="mt-2 text-gray-400 text-sm">Designed and prototyped a dust control system to minimize environmental pollution in stone crushing operations through effective filtration and misting techniques.</p>
+        </details>
+        <details tabindex="0" class="bg-[#161b22] rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <summary>Geneva Mechanism for Production Line Conveyor System — Intermittent motion control demonstration.</summary>
+          <p class="mt-2 text-gray-400 text-sm">Built a mini model demonstrating intermittent motion control in conveyor systems using the Geneva mechanism to enhance production line efficiency.</p>
+        </details>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="https://www.instagram.com/lohit__kumbar__" target="_blank" rel="noopener" class="text-[#c9a23f] font-semibold hover:text-yellow-400 focus:outline-none">Follow me on Instagram</a>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" tabindex="0" aria-labelledby="skills-title" data-aos="fade-left" data-aos-delay="150">
+      <h3 id="skills-title" class="text-3xl font-bold mb-6 text-[#c9a23f]">🛠 Skills</h3>
+      <div class="skills-grid max-w-4xl mx-auto">
+        <div class="skill-category">
+          <h4><i class="fas fa-cube text-yellow-400"></i> CAD Tools</h4>
+          <ul class="list-disc list-inside text-gray-300">
+            <li>SolidWorks</li>
+            <li>Fusion 360</li>
+            <li>CATIA</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4><i class="fas fa-hammer text-yellow-400"></i> Manufacturing & Assembly</h4>
+          <ul class="list-disc list-inside text-gray-300">
+            <li>Fabrication</li>
+            <li>Machining</li>
+            <li>Assembly Processes</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4><i class="fas fa-print text-yellow-400"></i> Prototyping & 3D Printing</h4>
+          <ul class="list-disc list-inside text-gray-300">
+            <li>3D Printing</li>
+            <li>Rapid Prototyping</li>
+            <li>Design Validation</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4><i class="fas fa-tasks text-yellow-400"></i> Project Coordination</h4>
+          <ul class="list-disc list-inside text-gray-300">
+            <li>Project Planning</li>
+            <li>Vendor Management</li>
+            <li>Quality Control</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" tabindex="0" aria-labelledby="certifications-title" data-aos="fade-up" data-aos-delay="200">
+      <h3 id="certifications-title" class="text-3xl font-bold mb-6 text-[#c9a23f]">📜 Certifications</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Each cert -->
+        <div class="flex flex-col items-center">
+          <img src="cert_fusion360.jpg" alt="Fusion 360 Certificate" tabindex="0" class="cert-image" data-cert="cert_fusion360.jpg" />
+          <a href="cert_fusion360.jpg" download class="btn-resume mt-2" aria-label="Download Fusion 360 Certificate">Download</a>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="cert_matlab.jpg" alt="MATLAB Certificate" tabindex="0" class="cert-image" data-cert="cert_matlab.jpg" />
+          <a href="cert_matlab.jpg" download class="btn-resume mt-2" aria-label="Download MATLAB Certificate">Download</a>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="cert_lsswb.jpg" alt="Lean Six Sigma White Belt" tabindex="0" class="cert-image" data-cert="cert_lsswb.jpg" />
+          <a href="cert_lsswb.jpg" download class="btn-resume mt-2" aria-label="Download Lean Six Sigma White Belt Certificate">Download</a>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="cert_publicspeaking.jpg" alt="Public Speaking Certificate" tabindex="0" class="cert-image" data-cert="cert_publicspeaking.jpg" />
+          <a href="cert_publicspeaking.jpg" download class="btn-resume mt-2" aria-label="Download Public Speaking Certificate">Download</a>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="cert_organizational.jpg" alt="Organizational Behaviour Certificate" tabindex="0" class="cert-image" data-cert="cert_organizational.jpg" />
+          <a href="cert_organizational.jpg" download class="btn-resume mt-2" aria-label="Download Organizational Behaviour Certificate">Download</a>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="cert_solidworks.jpg" alt="SolidWorks Certificate" tabindex="0" class="cert-image" data-cert="cert_solidworks.jpg" />
+          <a href="cert_solidworks.jpg" download class="btn-resume mt-2" aria-label="Download SolidWorks Certificate">Download</a>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="cert_ebusiness.jpg" alt="E-Business Certificate" tabindex="0" class="cert-image" data-cert="cert_ebusiness.jpg" />
+          <a href="cert_ebusiness.jpg" download class="btn-resume mt-2" aria-label="Download E-Business Certificate">Download</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" tabindex="0" aria-labelledby="contact-title" data-aos="fade-up" data-aos-delay="250" class="max-w-3xl mx-auto">
+      <h3 id="contact-title" class="text-3xl font-bold mb-6 text-[#c9a23f]">📞 Contact</h3>
+      <div class="space-y-4">
+        <div class="contact-item">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <a href="mailto:lohitkumbarofficial@gmail.com" aria-label="Send email to lohitkumbarofficial@gmail.com">lohitkumbarofficial@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone" aria-hidden="true"></i>
+          <a href="tel:+918329131081" aria-label="Call +91 83291 31081">+91 83291 31081</a>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+          <a href="https://www.linkedin.com/in/lohit-kumbar-854242239" target="_blank" rel="noopener" aria-label="Lohit's LinkedIn profile">LinkedIn</a>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+          <a href="https://www.instagram.com/lohit__kumbar__" target="_blank" rel="noopener" aria-label="Lohit's Instagram profile">Instagram</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- Footer -->
-  <footer aria-label="Page Footer" tabindex="0">
-    © 2025 Lohit Kumbar. All Rights Reserved.
+  <footer class="text-center text-gray-400 py-6 mt-12 border-t border-gray-700">
+    &copy; 2025 Lohit Kumbar. All Rights Reserved.
   </footer>
 
   <!-- Lightbox Overlay -->
-  <div id="lightboxOverlay" tabindex="0" aria-label="Image preview" role="dialog" aria-modal="true" aria-hidden="true" onclick="closeLightbox()" onkeydown="if(event.key==='Escape') closeLightbox()">
-    <img src="" alt="Expanded certificate image" id="lightboxImage" />
+  <div id="lightboxOverlay" tabindex="-1" role="dialog" aria-modal="true" aria-label="Certificate Image Viewer">
+    <img src="" alt="Enlarged Certificate" />
   </div>
 
-  <!-- Inline JavaScript -->
   <script>
-    AOS.init({
-      once: true,
-      duration: 700,
-      easing: 'ease-in-out',
-    });
-
     // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
     const menu = document.getElementById('menu');
     menuBtn.addEventListener('click', () => {
-      const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
-      menuBtn.setAttribute('aria-expanded', !expanded);
-      menu.classList.toggle('show');
+      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', !isExpanded);
+      menu.classList.toggle('hidden');
     });
 
-    // Background gear rotation speed control on scroll
-    let timeoutId;
-    const body = document.body;
-    window.addEventListener('scroll', () => {
-      body.classList.add('rotating-fast');
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        body.classList.remove('rotating-fast');
-      }, 1500);
-    });
-
-    // Lightbox functionality for certification images
-    const lightboxOverlay = document.getElementById('lightboxOverlay');
-    const lightboxImage = document.getElementById('lightboxImage');
-
-    function openLightbox(img) {
-      lightboxImage.src = img.src;
-      lightboxImage.alt = img.alt;
-      lightboxOverlay.style.display = 'flex';
-      lightboxOverlay.setAttribute('aria-hidden', 'false');
-      lightboxOverlay.focus();
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightboxOverlay.style.display = 'none';
-      lightboxOverlay.setAttribute('aria-hidden', 'true');
-      lightboxImage.src = '';
-      document.body.style.overflow = '';
-    }
-
-    // Accessibility: trap focus inside lightbox when open
-    lightboxOverlay.addEventListener('keydown', function(e) {
-      if (e.key === 'Tab') {
+    // Smooth scroll on nav link click
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
+        menu.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', false);
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth',
+        });
+      });
+    });
+
+    // AOS init
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+
+    // Lightbox functionality for certifications
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImg = lightboxOverlay.querySelector('img');
+    document.querySelectorAll('.cert-image').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.dataset.cert;
+        lightboxOverlay.style.display = 'flex';
         lightboxOverlay.focus();
-      }
+      });
+      img.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          lightboxImg.src = img.dataset.cert;
+          lightboxOverlay.style.display = 'flex';
+          lightboxOverlay.focus();
+        }
+      });
+    });
+    lightboxOverlay.addEventListener('click', () => {
+      lightboxOverlay.style.display = 'none';
+      lightboxImg.src = '';
+    });
+    lightboxOverlay.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        closeLightbox();
+        lightboxOverlay.style.display = 'none';
+        lightboxImg.src = '';
       }
     });
+
   </script>
 </body>
 </html>
